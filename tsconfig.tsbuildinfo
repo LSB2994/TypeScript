@@ -1,0 +1,1 @@
+{"root":["./src/aliases.ts","./src/assertions.ts","./src/enums.ts","./src/functions.ts","./src/index.ts","./src/intersections.ts","./src/never.ts","./src/nullables.ts","./src/nullish.ts","./src/objects.ts","./src/optionalchaining.ts","./src/unions.ts","./src/unknow.ts","./src/class/account.ts"],"version":"5.7.3"}

@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@types/jsdom": "^21.1.7",
+    "jsdom": "^26.0.0",
+      "openai": "^4.81.0"
+    },
+    "scripts": {
+      "clean": "del /q dist\\* || exit 0",
+      "build": "npm run clean && tsc"
+    }
+}
