@@ -1,11 +1,16 @@
 {
   "dependencies": {
     "@types/jsdom": "^21.1.7",
+    "@types/prompt-sync": "^4.2.3",
     "jsdom": "^26.0.0",
-      "openai": "^4.81.0"
-    },
-    "scripts": {
-      "clean": "del /q dist\\* || exit 0",
-      "build": "npm run clean && tsc"
-    }
+    "openai": "^4.81.0",
+    "prompt-sync": "^4.2.0"
+  },
+  "scripts": {
+    "clean": "del /q dist\\* || exit 0",
+    "build": "npm run clean && tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
 }

@@ -1,118 +1,30 @@
-import promptSync from 'prompt-sync';
+class acccout{
+    readonly id : number;
+    private _balance : number;
+    owner : string;
+    nickname? : string;
 
-const prompt = promptSync({ sigint: true });
-
-export class Account {
-    
-    id: number;
-    owner: string;
-    balance: number;
-
-    constructor(id: number, owner: string, balance: number) {
+    constructor(id : number, balance : number, owner : string, nickname? : string){
         this.id = id;
+        this._balance = balance;
         this.owner = owner;
-        this.balance = balance;
+        this.nickname = nickname;
     }
 
-    deposit(amount: number) {
-        this.balance += amount;
-        console.log(`Deposited ${amount}. New balance is ${this.balance}.`);
-    }
-
-    withdraw(amount: number) {
-        if (amount > this.balance) {
-            throw new Error("Insufficient balance.");
+    deposit(amount: number):void{
+        if(amount > 0){
+            this._balance += amount;
         }
-        this.balance -= amount;
-        console.log(`Withdrawn ${amount}. New balance is ${this.balance}.`);
+        throw new Error('Invalid amount');
     }
 
-    display() {
-        console.log(`Account ID: ${this.id}`);
-        console.log(`Account Holder: ${this.owner}`);
-        console.log(`Account Balance: ${this.balance}`);
+    calculateTax():number{
+        return this._balance * 0.25;
+    }
+
+    getBalance():number{
+        return this._balance;
     }
 }
-
-// Create account from user input
-function createAccount(): Account {
-    console.log("\nCreate a new account:");
-    const id = parseInt(prompt("Enter account ID: "));
-    const owner = prompt("Enter owner name: ");
-    const balance = parseFloat(prompt("Enter initial balance: "));
-    
-    if (isNaN(id) || isNaN(balance)) {
-        throw new Error("Invalid input for ID or balance");
-    }
-    
-    return new Account(id, owner, balance);
-}
-
-// Main program
-function main() {
-    console.log("Welcome to the bank!");
-    try {
-        const account = createAccount();
-        
-        while (true) {
-            console.log("\nChoose an operation:");
-            console.log("1. Deposit");
-            console.log("2. Withdraw");
-            console.log("3. Display Info");
-            console.log("4. Exit");
-            
-            const choice = prompt("Enter your choice (1-4): ");
-            
-            switch (choice) {
-                case '1':
-                    const depositAmount = parseFloat(prompt("Enter deposit amount: "));
-                    if (!isNaN(depositAmount)) {
-                        account.deposit(depositAmount);
-                    } else {
-                        console.log("Invalid amount!");
-                    }
-                    break;
-                    
-                case '2':
-                    const withdrawAmount = parseFloat(prompt("Enter withdrawal amount: "));
-                    if (!isNaN(withdrawAmount)) {
-                        try {
-                            account.withdraw(withdrawAmount);
-                        } catch (error) {
-                            if (error instanceof Error) {
-                                console.log(error.message);
-                            } else {
-                                console.log("Unknown error:", error);
-                            }
-                        }
-                    } else {
-                        console.log("Invalid amount!");
-                    }
-                    break;
-                    
-                case '3':
-                    account.display();
-                    break;
-                    
-                case '4':
-                    console.log("Exiting program...");
-                    return;
-                    
-                default:
-                    console.log("Invalid choice!");
-                    break;
-            }
-        }
-    } catch (error) {
-        if (error instanceof Error) {
-            console.log("Error:", error.message);
-        } else {
-            console.log("Unknown error:", error);
-        }
-    }
-}
-
-// Run the program
-console.log("Starting bank program...");
-
-main();
+let account = new acccout(1, 100, 'John Doe');
+console.log(account.getBalance()); //100
